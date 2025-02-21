@@ -386,7 +386,15 @@
         "required": true,
         "types": [
           {
+            "type": "bracket_expression",
+            "named": true
+          },
+          {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_expression",
             "named": true
           },
           {

@@ -434,3 +434,49 @@ Directive with parameters
               (string))))))
     (end_tag
       (tag_name))))
+
+===============================
+Multi-line structural directive
+===============================
+
+<div
+  *ngIf="
+    Obj[SomeEnum.X] +
+    Obj[SomeEnum['xx']] +
+    Obj[2]
+  "
+>
+
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (structural_directive
+          (identifier)
+          (structural_expression
+            (binary_expression
+              (expression
+                (bracket_expression
+                  (identifier)
+                  (member_expression
+                    (identifier)
+                    (identifier))))
+              (binary_expression
+                (expression
+                  (bracket_expression
+                    (identifier)
+                    (bracket_expression
+                      (identifier)
+                      (static_member_expression
+                        (identifier)))))
+                (expression
+                  (bracket_expression
+                    (identifier)
+                    (identifier)))))))))
+    (end_tag
+      (tag_name))))

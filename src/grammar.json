@@ -3169,6 +3169,14 @@
                 {
                   "type": "SYMBOL",
                   "name": "static_member_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "bracket_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "member_expression"
                 }
               ]
             }

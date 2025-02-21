@@ -573,7 +573,7 @@ module.exports = grammar(HTML, {
         seq(
           field('object', $._primitive),
           '[',
-          field('property', choice($.identifier, $.static_member_expression)),
+          field('property', choice($.identifier, $.static_member_expression, $.bracket_expression, $.member_expression)),
           ']',
         ),
       ),
