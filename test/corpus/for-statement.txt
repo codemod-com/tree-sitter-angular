@@ -253,3 +253,93 @@ For-statement with let
             (identifier)))
         (end_tag
           (tag_name))))))
+
+=============
+For statement with text sibling
+=============
+
+<div>
+  Hello world
+  @for (item of items; track item.id) {
+    <li>{{ item.name }}</li>
+  }
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name))
+    (text)
+    (for_statement
+      (control_keyword)
+      (for_declaration
+        (identifier)
+        (special_keyword)
+        (expression
+          (identifier))
+        (special_keyword)
+        (expression
+          (member_expression
+            (identifier)
+            (identifier))))
+      (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (interpolation
+            (expression
+              (member_expression
+                (identifier)
+                (identifier))))
+          (end_tag
+            (tag_name)))))
+    (end_tag
+      (tag_name))))
+
+=============
+For statement with text sibling including @
+=============
+
+<div>
+  This is your @username
+  @for (item of items; track item.id) {
+    <li>{{ item.name }}</li>
+  }
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name))
+    (text)
+    (at_sign)
+    (text)
+    (for_statement
+      (control_keyword)
+      (for_declaration
+        (identifier)
+        (special_keyword)
+        (expression
+          (identifier))
+        (special_keyword)
+        (expression
+          (member_expression
+            (identifier)
+            (identifier))))
+      (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (interpolation
+            (expression
+              (member_expression
+                (identifier)
+                (identifier))))
+          (end_tag
+            (tag_name)))))
+    (end_tag
+      (tag_name))))

@@ -68,6 +68,10 @@
           }
         },
         {
+          "type": "SYMBOL",
+          "name": "at_sign"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
@@ -483,7 +487,7 @@
     },
     "text": {
       "type": "PATTERN",
-      "value": "[^<>{}&\\s]([^<>{}&]*[^<>{}&\\s])?"
+      "value": "[^<>{}&@\\s]([^<>{}&@]*[^<>{}&@\\s])?"
     },
     "statement_block": {
       "type": "PREC_RIGHT",
@@ -601,16 +605,7 @@
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "_control_flow_start"
-            },
-            "named": false,
-            "value": "@"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "let"
+              "name": "let_start"
             },
             "named": true,
             "value": "control_keyword"
@@ -636,16 +631,7 @@
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "_control_flow_start"
-            },
-            "named": false,
-            "value": "@"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "switch"
+              "name": "switch_start"
             },
             "named": true,
             "value": "control_keyword"
@@ -713,16 +699,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_control_flow_start"
-          },
-          "named": false,
-          "value": "@"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "case"
+            "name": "case_start"
           },
           "named": true,
           "value": "control_keyword"
@@ -760,16 +737,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_control_flow_start"
-          },
-          "named": false,
-          "value": "@"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "default"
+            "name": "default_start"
           },
           "named": true,
           "value": "control_keyword"
@@ -794,16 +762,7 @@
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "_control_flow_start"
-            },
-            "named": false,
-            "value": "@"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "defer"
+              "name": "defer_start"
             },
             "named": true,
             "value": "control_keyword"
@@ -841,16 +800,7 @@
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "_control_flow_start"
-            },
-            "named": false,
-            "value": "@"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "placeholder"
+              "name": "placeholder_start"
             },
             "named": true,
             "value": "control_keyword"
@@ -888,16 +838,7 @@
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "_control_flow_start"
-            },
-            "named": false,
-            "value": "@"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "loading"
+              "name": "loading_start"
             },
             "named": true,
             "value": "control_keyword"
@@ -932,16 +873,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_control_flow_start"
-          },
-          "named": false,
-          "value": "@"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "error"
+            "name": "error_start"
           },
           "named": true,
           "value": "control_keyword"
@@ -1202,16 +1134,7 @@
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "_control_flow_start"
-            },
-            "named": false,
-            "value": "@"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "for"
+              "name": "for_start"
             },
             "named": true,
             "value": "control_keyword"
@@ -1275,16 +1198,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_control_flow_start"
-          },
-          "named": false,
-          "value": "@"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "empty"
+            "name": "empty_start"
           },
           "named": true,
           "value": "control_keyword"
@@ -1408,125 +1322,14 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_if_start_expression"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_if_body_expression"
-          }
-        ]
-      }
-    },
-    "else_if_statement": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_else_if_start_expression"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_if_body_expression"
-          }
-        ]
-      }
-    },
-    "else_statement": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
-              "name": "_control_flow_start"
-            },
-            "named": false,
-            "value": "@"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "else"
+              "name": "if_start"
             },
             "named": true,
             "value": "control_keyword"
           },
-          {
-            "type": "SYMBOL",
-            "name": "statement_block"
-          }
-        ]
-      }
-    },
-    "_if_start_expression": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_control_flow_start"
-          },
-          "named": false,
-          "value": "@"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "if"
-          },
-          "named": true,
-          "value": "control_keyword"
-        }
-      ]
-    },
-    "_else_if_start_expression": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_control_flow_start"
-          },
-          "named": false,
-          "value": "@"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "else"
-          },
-          "named": true,
-          "value": "control_keyword"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "if"
-          },
-          "named": true,
-          "value": "control_keyword"
-        }
-      ]
-    },
-    "_if_body_expression": {
-      "type": "PREC_LEFT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
           {
             "type": "STRING",
             "value": "("
@@ -1562,6 +1365,105 @@
           {
             "type": "FIELD",
             "name": "consequence",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement_block"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_alternative_statement"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "else_if_statement": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "else_if_start"
+            },
+            "named": true,
+            "value": "control_keyword"
+          },
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "FIELD",
+            "name": "condition",
+            "content": {
+              "type": "SYMBOL",
+              "name": "if_condition"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "reference",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "if_reference"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          },
+          {
+            "type": "FIELD",
+            "name": "consequence",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement_block"
+            }
+          }
+        ]
+      }
+    },
+    "else_statement": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "else_start"
+            },
+            "named": true,
+            "value": "control_keyword"
+          },
+          {
+            "type": "FIELD",
+            "name": "body",
             "content": {
               "type": "SYMBOL",
               "name": "statement_block"
@@ -3349,7 +3251,59 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_control_flow_start"
+      "name": "if_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "else_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "for_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "switch_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "case_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "default_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "defer_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "let_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "empty_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "placeholder_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "loading_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "error_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "else_if_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "at_sign"
     }
   ],
   "inline": [],

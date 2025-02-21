@@ -904,6 +904,10 @@
       "required": false,
       "types": [
         {
+          "type": "at_sign",
+          "named": true
+        },
+        {
           "type": "defer_statement",
           "named": true
         },
@@ -1032,6 +1036,10 @@
       "required": true,
       "types": [
         {
+          "type": "at_sign",
+          "named": true
+        },
+        {
           "type": "defer_statement",
           "named": true
         },
@@ -1138,7 +1146,7 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -1151,17 +1159,24 @@
   {
     "type": "else_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "statement_block",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "control_keyword",
-          "named": true
-        },
-        {
-          "type": "statement_block",
           "named": true
         }
       ]
@@ -1593,6 +1608,10 @@
       "required": true,
       "types": [
         {
+          "type": "at_sign",
+          "named": true
+        },
+        {
           "type": "defer_statement",
           "named": true
         },
@@ -1765,6 +1784,26 @@
     "type": "if_statement",
     "named": true,
     "fields": {
+      "alternative": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "else_statement",
+            "named": true
+          }
+        ]
+      },
+      "alternative_condition": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "else_if_statement",
+            "named": true
+          }
+        ]
+      },
       "condition": {
         "multiple": false,
         "required": true,
@@ -1781,6 +1820,46 @@
         "types": [
           {
             "type": "statement_block",
+            "named": true
+          }
+        ]
+      },
+      "empty": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "empty_statement",
+            "named": true
+          }
+        ]
+      },
+      "error": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "error_statement",
+            "named": true
+          }
+        ]
+      },
+      "loading": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "loading_statement",
+            "named": true
+          }
+        ]
+      },
+      "placeholder": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "placeholder_statement",
             "named": true
           }
         ]
@@ -2459,6 +2538,10 @@
       "required": false,
       "types": [
         {
+          "type": "at_sign",
+          "named": true
+        },
+        {
           "type": "defer_statement",
           "named": true
         },
@@ -3123,10 +3206,6 @@
     "named": false
   },
   {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "[",
     "named": false
   },
@@ -3141,6 +3220,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "at_sign",
+    "named": true
   },
   {
     "type": "attribute_name",

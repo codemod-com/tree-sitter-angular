@@ -169,13 +169,13 @@ Placeholder with minimum
         (self_closing_tag
           (tag_name)))))
   placeholder: (placeholder_statement
-      (control_keyword)
-      (placeholder_minimum
-        minimum: (timed_expression
-          (special_keyword)
-          value: (number)
-          (unit)))
-      body: (statement_block
+    (control_keyword)
+    (placeholder_minimum
+      minimum: (timed_expression
+        (special_keyword)
+        value: (number)
+        (unit)))
+    body: (statement_block
       (element
         (self_closing_tag
           (tag_name))))))
@@ -368,26 +368,26 @@ Defer-placeholder-loading-error
         (self_closing_tag
           (tag_name)))))
   loading: (loading_statement
-      (control_keyword)
-      (loading_condition
-        condition: (timed_expression
-          (special_keyword)
-          value: (number)
-          (unit))
-        condition: (timed_expression
-          (special_keyword)
-          value: (number)
-          (unit)))
+    (control_keyword)
+    (loading_condition
+      condition: (timed_expression
+        (special_keyword)
+        value: (number)
+        (unit))
+      condition: (timed_expression
+        (special_keyword)
+        value: (number)
+        (unit)))
     body: (statement_block
       (element
         (self_closing_tag
           (tag_name)))))
-    error: (error_statement
-      (control_keyword)
-      body: (statement_block
-        (element
-          (self_closing_tag
-            (tag_name))))))
+  error: (error_statement
+    (control_keyword)
+    body: (statement_block
+      (element
+        (self_closing_tag
+          (tag_name))))))
 
 ===============
 Consecutive Defer statement

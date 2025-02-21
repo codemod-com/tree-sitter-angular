@@ -26,7 +26,7 @@ If statement
           (tag_name))))))
 
 =================
-If-else statement
+Else-if statement
 =================
 
 @if (a > b) {
@@ -52,9 +52,39 @@ If-else statement
           (tag_name))
         (text)
         (end_tag
-          (tag_name)))))
-  alternative_condition: (else_if_statement
-    (control_keyword)
+          (tag_name))))
+    alternative_condition: (else_if_statement
+      (control_keyword)
+      condition: (if_condition
+        (binary_expression
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))
+      consequence: (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (text)
+          (end_tag
+            (tag_name)))))))
+
+=================
+If-else-if-else statement
+=================
+
+@if (a > b) {
+  <p>a is greater than b</p>
+} @else if (b > 2) {
+  <p>a is less than b</p>
+} @else {
+  <p>a is not greater than b</p>
+}
+
+---
+
+(document
+  (if_statement
     (control_keyword)
     condition: (if_condition
       (binary_expression
@@ -68,7 +98,31 @@ If-else statement
           (tag_name))
         (text)
         (end_tag
-          (tag_name))))))
+          (tag_name))))
+    alternative_condition: (else_if_statement
+      (control_keyword)
+      condition: (if_condition
+        (binary_expression
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))
+      consequence: (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (text)
+          (end_tag
+            (tag_name)))))
+    alternative: (else_statement
+      (control_keyword)
+      body: (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (text)
+          (end_tag
+            (tag_name)))))))
 
 =================
 Else statement
@@ -97,16 +151,16 @@ Else statement
           (tag_name))
         (text)
         (end_tag
-          (tag_name)))))
-  alternative: (else_statement
-    (control_keyword)
-    (statement_block
-      (element
-        (start_tag
-          (tag_name))
-        (text)
-        (end_tag
-          (tag_name))))))
+          (tag_name))))
+    alternative: (else_statement
+      (control_keyword)
+      body: (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (text)
+          (end_tag
+            (tag_name)))))))
 
 =========
 Nested if
@@ -152,16 +206,16 @@ Nested if
               (tag_name))
             (text)
             (end_tag
-              (tag_name)))))
-      alternative: (else_statement
-        (control_keyword)
-        (statement_block
-          (element
-            (start_tag
-              (tag_name))
-            (text)
-            (end_tag
-              (tag_name))))))))
+              (tag_name))))
+        alternative: (else_statement
+          (control_keyword)
+          body: (statement_block
+            (element
+              (start_tag
+                (tag_name))
+              (text)
+              (end_tag
+                (tag_name)))))))))
 
 =================
 If with reference
@@ -376,3 +430,80 @@ If statement with expression
         (text)
         (end_tag
           (tag_name))))))
+
+======================
+If with text sibling
+======================
+
+<div>
+  Hello world
+  @if (a > b) {
+    <p>a is greater than b</p>
+  }
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name))
+    (text)
+    (if_statement
+      (control_keyword)
+      (if_condition
+        (binary_expression
+          (expression
+            (identifier))
+          (expression
+            (identifier))))
+      (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (text)
+          (end_tag
+            (tag_name)))))
+    (end_tag
+      (tag_name))))
+
+=============
+If statement with element sibling
+=============
+
+<div>
+  <p>Hello world</p>
+  @if (a > b) {
+    <p>a is greater than b</p>
+  }
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name))
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
+    (if_statement
+      (control_keyword)
+      (if_condition
+        (binary_expression
+          (expression
+            (identifier))
+          (expression
+            (identifier))))
+      (statement_block
+        (element
+          (start_tag
+            (tag_name))
+          (text)
+          (end_tag
+            (tag_name)))))
+    (end_tag
+      (tag_name))))

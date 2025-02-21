@@ -21,7 +21,21 @@ module.exports = grammar(HTML, {
     original.concat([
       $._interpolation_start,
       $._interpolation_end,
-      $._control_flow_start,
+      // $._control_flow_start,
+      $.if_start,
+      $.else_start,
+      $.for_start,
+      $.switch_start,
+      $.case_start,
+      $.default_start,
+      $.defer_start,
+      $.let_start,
+      $.empty_start,
+      $.placeholder_start,
+      $.loading_start,
+      $.error_start,
+      $.else_if_start,
+      $.at_sign,
     ]),
 
   rules: {
@@ -31,12 +45,13 @@ module.exports = grammar(HTML, {
         prec(1, $.icu_expression),
         prec(1, $.interpolation),
         prec(1, $._any_statement),
+        $.at_sign,
         original,
       ),
 
     // ---------- Overrides ----------
     attribute_name: (_) => /[^<>\*.\[\]\(\)"'=\s]+/,
-    text: (_) => /[^<>{}&\s]([^<>{}&]*[^<>{}&\s])?/,
+    text: (_) => /[^<>{}&@\s]([^<>{}&@]*[^<>{}&@\s])?/,
 
     // ----------- Statement block --------
     statement_block: ($) => prec.right(seq('{', repeat($._node), '}')),
@@ -63,24 +78,15 @@ module.exports = grammar(HTML, {
       ),
 
     // ---------- Let Statement ----------
-
     let_statement: ($) =>
-      prec.left(
-        seq(
-          alias($._control_flow_start, '@'),
-          alias('let', $.control_keyword),
-          $.assignment_expression,
-          ';',
-        ),
-      ),
+      prec.left(seq(alias($.let_start, $.control_keyword), $.assignment_expression, ';')),
 
     // ---------- Switch Statement ----------
 
     switch_statement: ($) =>
       prec.right(
         seq(
-          alias($._control_flow_start, '@'),
-          alias('switch', $.control_keyword),
+          alias($.switch_start, $.control_keyword),
           '(',
           field('value', $.expression),
           ')',
@@ -93,8 +99,7 @@ module.exports = grammar(HTML, {
 
     case_statement: ($) =>
       seq(
-        alias($._control_flow_start, '@'),
-        alias('case', $.control_keyword),
+        alias($.case_start, $.control_keyword),
         '(',
         field('value', $._primitive),
         ')',
@@ -102,19 +107,14 @@ module.exports = grammar(HTML, {
       ),
 
     default_statement: ($) =>
-      seq(
-        alias($._control_flow_start, '@'),
-        alias('default', $.control_keyword),
-        field('body', $.statement_block),
-      ),
+      seq(alias($.default_start, $.control_keyword), field('body', $.statement_block)),
 
     // ---------- Defer Statement ----------
 
     defer_statement: ($) =>
       prec.left(
         seq(
-          alias($._control_flow_start, '@'),
-          alias('defer', $.control_keyword),
+          alias($.defer_start, $.control_keyword),
           optional($.defer_trigger),
           field('body', $.statement_block),
         ),
@@ -123,8 +123,7 @@ module.exports = grammar(HTML, {
     placeholder_statement: ($) =>
       prec.left(
         seq(
-          alias($._control_flow_start, '@'),
-          alias('placeholder', $.control_keyword),
+          alias($.placeholder_start, $.control_keyword),
           optional($.placeholder_minimum),
           field('body', $.statement_block),
         ),
@@ -133,19 +132,14 @@ module.exports = grammar(HTML, {
     loading_statement: ($) =>
       prec.left(
         seq(
-          alias($._control_flow_start, '@'),
-          alias('loading', $.control_keyword),
+          alias($.loading_start, $.control_keyword),
           optional($.loading_condition),
           field('body', $.statement_block),
         ),
       ),
 
     error_statement: ($) =>
-      seq(
-        alias($._control_flow_start, '@'),
-        alias('error', $.control_keyword),
-        field('body', $.statement_block),
-      ),
+      seq(alias($.error_start, $.control_keyword), field('body', $.statement_block)),
 
     defer_trigger: ($) =>
       seq(
@@ -185,8 +179,7 @@ module.exports = grammar(HTML, {
     for_statement: ($) =>
       prec.left(
         seq(
-          alias($._control_flow_start, '@'),
-          alias('for', $.control_keyword),
+          alias($.for_start, $.control_keyword),
           '(',
           field('declaration', $.for_declaration),
           optional(seq(';', field('reference', $.for_reference))),
@@ -196,11 +189,7 @@ module.exports = grammar(HTML, {
       ),
 
     empty_statement: ($) =>
-      seq(
-        alias($._control_flow_start, '@'),
-        alias('empty', $.control_keyword),
-        field('body', $.statement_block),
-      ),
+      seq(alias($.empty_start, $.control_keyword), field('body', $.statement_block)),
 
     for_declaration: ($) =>
       seq(
@@ -220,39 +209,34 @@ module.exports = grammar(HTML, {
       ),
 
     // ---------- If Statement ----------
-    if_statement: ($) => prec.right(seq($._if_start_expression, $._if_body_expression)),
-
-    else_if_statement: ($) =>
-      prec.right(seq($._else_if_start_expression, $._if_body_expression)),
-
-    else_statement: ($) =>
+    if_statement: ($) =>
       prec.right(
         seq(
-          alias($._control_flow_start, '@'),
-          alias('else', $.control_keyword),
-          $.statement_block,
+          alias($.if_start, $.control_keyword),
+          '(',
+          field('condition', $.if_condition),
+          optional(field('reference', $.if_reference)),
+          ')',
+          field('consequence', $.statement_block),
+          optional(repeat($._alternative_statement)),
         ),
       ),
 
-    _if_start_expression: ($) =>
-      seq(alias($._control_flow_start, '@'), alias('if', $.control_keyword)),
-
-    _else_if_start_expression: ($) =>
-      seq(
-        alias($._control_flow_start, '@'),
-        alias('else', $.control_keyword),
-        alias('if', $.control_keyword),
-      ),
-
-    _if_body_expression: ($) =>
-      prec.left(
+    else_if_statement: ($) =>
+      prec.right(
         seq(
+          alias($.else_if_start, $.control_keyword),
           '(',
           field('condition', $.if_condition),
           optional(field('reference', $.if_reference)),
           ')',
           field('consequence', $.statement_block),
         ),
+      ),
+
+    else_statement: ($) =>
+      prec.right(
+        seq(alias($.else_start, $.control_keyword), field('body', $.statement_block)),
       ),
 
     if_condition: ($) => prec.right(PREC.CALL, $._any_expression),
@@ -573,7 +557,15 @@ module.exports = grammar(HTML, {
         seq(
           field('object', $._primitive),
           '[',
-          field('property', choice($.identifier, $.static_member_expression, $.bracket_expression, $.member_expression)),
+          field(
+            'property',
+            choice(
+              $.identifier,
+              $.static_member_expression,
+              $.bracket_expression,
+              $.member_expression,
+            ),
+          ),
           ']',
         ),
       ),
