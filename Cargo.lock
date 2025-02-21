@@ -82,7 +82,7 @@ dependencies = [
 
 [[package]]
 name = "tree-sitter-angular-codemod"
-version = "0.5.6"
+version = "0.6.0"
 dependencies = [
  "cc",
  "tree-sitter",
