@@ -12,6 +12,9 @@ const HTML = require('tree-sitter-html/grammar');
 const PREC = {
   CALL: 1,
   ALIAS: 2,
+  PIPE: 3,
+  NULLISH: 4,
+  INTERPOLATION: 5,
 };
 
 module.exports = grammar(HTML, {
@@ -276,10 +279,13 @@ module.exports = grammar(HTML, {
 
     // ---------- Interpolation ---------
     interpolation: ($) =>
-      seq(
-        alias($._interpolation_start, '{{'),
-        choice($._any_expression, $.concatenation_expression),
-        alias($._interpolation_end, '}}'),
+      prec.right(
+        PREC.INTERPOLATION,
+        seq(
+          alias($._interpolation_start, '{{'),
+          choice($._any_expression, $.concatenation_expression),
+          alias($._interpolation_end, '}}'),
+        ),
       ),
 
     concatenation_expression: ($) =>
@@ -383,7 +389,7 @@ module.exports = grammar(HTML, {
 
     // ---------- Expressions ---------
     // Expression
-    expression: ($) => seq($._primitive, optional(field('pipes', $.pipe_sequence))),
+    expression: ($) => prec.left(seq($._primitive, optional(field('pipes', $.pipe_sequence)))),
 
     // Unary expression
     unary_expression: ($) =>
@@ -415,10 +421,13 @@ module.exports = grammar(HTML, {
 
     // Nullish coalescing expression
     nullish_coalescing_expression: ($) =>
-      seq(
-        field('condition', $._any_expression),
-        alias('??', $.coalescing_operator),
-        field('default', $._primitive),
+      prec.right(
+        PREC.NULLISH,
+        seq(
+          field('condition', $._any_expression),
+          alias('??', $.coalescing_operator),
+          field('default', $._primitive),
+        ),
       ),
 
     // Conditional expression
@@ -441,13 +450,16 @@ module.exports = grammar(HTML, {
       ),
 
     // ---------- Pipes ---------
-    pipe_sequence: ($) => repeat1(seq(alias('|', $.pipe_operator), $.pipe_call)),
+    pipe_sequence: ($) => prec.left(PREC.PIPE, repeat1(seq(alias('|', $.pipe_operator), $.pipe_call))),
 
     pipe_call: ($) =>
-      seq(field('name', $.identifier), optional(field('arguments', $.pipe_arguments))),
+      prec.left(
+        PREC.PIPE,
+        seq(field('name', $.identifier), optional(field('arguments', $.pipe_arguments))),
+      ),
 
-    pipe_arguments: ($) => repeat1($._pipe_argument),
-    _pipe_argument: ($) => seq(':', $._primitive),
+    pipe_arguments: ($) => prec.left(PREC.PIPE, repeat1($._pipe_argument)),
+    _pipe_argument: ($) => prec.left(PREC.PIPE, seq(':', choice($._any_expression, $.group))),
 
     // ---------- Primitives ----------
     _primitive: ($) =>

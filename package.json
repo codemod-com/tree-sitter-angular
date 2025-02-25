@@ -1,6 +1,6 @@
 {
   "name": "@codemod.com/tree-sitter-angular",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Tree-sitter grammar for the Angular framework",
   "main": "bindings/node",
   "types": "bindings/node",
@@ -61,5 +61,11 @@
     "tree_sitter": {
       "optional": true
     }
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.angular",
+      "injection-regex": "^angular$"
+    }
+  ]
 }

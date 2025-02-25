@@ -62,8 +62,10 @@ Pipe with arguments
           (pipe_call
             (identifier)
             (pipe_arguments
-              (identifier)
-              (identifier))))))
+              (expression
+                (identifier))
+              (expression
+                (identifier)))))))
     (end_tag
       (tag_name))))
 
@@ -151,7 +153,7 @@ Grouping
                       (identifier)))))
               (identifier))))
         (expression
-         (string))))
+          (string))))
     (end_tag
       (tag_name))))
 
@@ -226,3 +228,25 @@ String concat with pipes
           (pipe_call
             (identifier)))))))
 
+====================
+String concat with pipes
+====================
+
+{{ 'xx' | transloco: xx + yy }}
+
+---
+
+(document
+  (interpolation
+    (expression
+      (string)
+      (pipe_sequence
+        (pipe_operator)
+        (pipe_call
+          (identifier)
+          (pipe_arguments
+            (binary_expression
+              (expression
+                (identifier))
+              (expression
+                (identifier)))))))))
