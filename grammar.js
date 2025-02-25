@@ -376,6 +376,7 @@ module.exports = grammar(HTML, {
         '=',
         $._double_quote,
         optional(choice($._any_expression, $.assignment_expression)),
+        repeat(seq(';', optional(choice($._any_expression, $.assignment_expression)))),
         $._double_quote,
       ),
 
@@ -389,7 +390,8 @@ module.exports = grammar(HTML, {
 
     // ---------- Expressions ---------
     // Expression
-    expression: ($) => prec.left(seq($._primitive, optional(field('pipes', $.pipe_sequence)))),
+    expression: ($) =>
+      prec.left(seq($._primitive, optional(field('pipes', $.pipe_sequence)))),
 
     // Unary expression
     unary_expression: ($) =>
@@ -450,7 +452,8 @@ module.exports = grammar(HTML, {
       ),
 
     // ---------- Pipes ---------
-    pipe_sequence: ($) => prec.left(PREC.PIPE, repeat1(seq(alias('|', $.pipe_operator), $.pipe_call))),
+    pipe_sequence: ($) =>
+      prec.left(PREC.PIPE, repeat1(seq(alias('|', $.pipe_operator), $.pipe_call))),
 
     pipe_call: ($) =>
       prec.left(
@@ -459,7 +462,8 @@ module.exports = grammar(HTML, {
       ),
 
     pipe_arguments: ($) => prec.left(PREC.PIPE, repeat1($._pipe_argument)),
-    _pipe_argument: ($) => prec.left(PREC.PIPE, seq(':', choice($._any_expression, $.group))),
+    _pipe_argument: ($) =>
+      prec.left(PREC.PIPE, seq(':', choice($._any_expression, $.group))),
 
     // ---------- Primitives ----------
     _primitive: ($) =>
