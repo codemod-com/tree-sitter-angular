@@ -6,7 +6,7 @@
 //! ```
 //! let code = "";
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(&tree_sitter_angular::language()).expect("Error loading angular grammar");
+//! parser.set_language(&tree_sitter_angular_codemod::language()).expect("Error loading angular grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
 //!
@@ -22,6 +22,11 @@ extern "C" {
 }
 
 pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_angular) };
+
+/// Returns the tree-sitter language for Angular.
+pub fn language() -> tree_sitter::Language {
+    LANGUAGE.into()
+}
 
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
