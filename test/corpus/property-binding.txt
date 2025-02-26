@@ -589,3 +589,28 @@ Escaped string expression
             (identifier))
           (expression
             (string)))))))
+
+==================
+Double unary expression
+==================
+
+<span [property]="!!someValue"></span>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (unary_expression
+            (unary_operator)
+            (unary_expression
+              (unary_operator)
+              (expression
+                (identifier)))))))
+    (end_tag
+      (tag_name))))
