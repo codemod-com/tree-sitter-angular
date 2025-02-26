@@ -400,11 +400,11 @@ module.exports = grammar(HTML, {
     // Binary expression
     binary_expression: ($) =>
       prec.left(
-        PREC.CALL,
+        PREC.CALL + 1, // Increase precedence slightly above CALL to ensure nesting
         seq(
-          field('left', $.expression),
+          field('left', choice($.expression, $.binary_expression)),
           field('operator', $._binary_op),
-          field('right', choice($.binary_expression, $.expression)),
+          field('right', $._primitive),
         ),
       ),
 
@@ -461,9 +461,15 @@ module.exports = grammar(HTML, {
         seq(field('name', $.identifier), optional(field('arguments', $.pipe_arguments))),
       ),
 
-    pipe_arguments: ($) => prec.left(PREC.PIPE, repeat1($._pipe_argument)),
-    _pipe_argument: ($) =>
-      prec.left(PREC.PIPE, seq(':', choice($._any_expression, $.group))),
+    pipe_arguments: ($) =>
+      prec.left(
+        PREC.PIPE,
+        seq(
+          ':',
+          field('argument', $._any_expression), // Use _any_expression to allow full expression parsing
+          repeat(seq(':', field('argument', $._any_expression))), // Allow multiple arguments
+        ),
+      ),
 
     // ---------- Primitives ----------
     _primitive: ($) =>

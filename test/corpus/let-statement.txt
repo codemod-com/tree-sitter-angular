@@ -15,8 +15,7 @@ Let statement
       value: (binary_expression
         left: (expression
           (identifier))
-        right: (expression
-          (identifier)))))
+        right: (identifier))))
   (element
     (start_tag
       (tag_name))

@@ -141,8 +141,7 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (expression
-                (identifier)))))))
+              right: (identifier))))))
     (end_tag
       (tag_name)))
   (element
@@ -155,8 +154,7 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (expression
-                (identifier)))))))
+              right: (identifier))))))
     (end_tag
       (tag_name)))
   (element
@@ -169,8 +167,7 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (expression
-                (identifier)))))))
+              right: (identifier))))))
     (end_tag
       (tag_name)))
   (element
@@ -183,8 +180,7 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (expression
-                (identifier)))))))
+              right: (identifier))))))
     (end_tag
       (tag_name)))
   (element
@@ -197,8 +193,7 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (expression
-                (identifier)))))))
+              right: (identifier))))))
     (end_tag
       (tag_name)))
   (element
@@ -374,16 +369,14 @@ Template Outlet context
                     (member_expression
                       object: (identifier)
                       property: (identifier)))
-                  right: (expression
-                    (identifier)))
+                  right: (identifier))
                 (conditional_operator)
                 right: (binary_expression
                   left: (expression
                     (member_expression
                       object: (identifier)
                       property: (identifier)))
-                  right: (expression
-                    (identifier))))
+                  right: (identifier)))
               (ternary_operator)
               consequence: (identifier)
               (ternary_operator)
@@ -460,23 +453,21 @@ Multi-line structural directive
           (identifier)
           (structural_expression
             (binary_expression
-              (expression
-                (bracket_expression
-                  (identifier)
-                  (member_expression
-                    (identifier)
-                    (identifier))))
               (binary_expression
                 (expression
                   (bracket_expression
                     (identifier)
-                    (bracket_expression
+                    (member_expression
                       (identifier)
-                      (static_member_expression
-                        (identifier)))))
-                (expression
+                      (identifier))))
+                (bracket_expression
+                  (identifier)
                   (bracket_expression
                     (identifier)
-                    (identifier)))))))))
+                    (static_member_expression
+                      (identifier)))))
+              (bracket_expression
+                (identifier)
+                (identifier)))))))
     (end_tag
       (tag_name))))

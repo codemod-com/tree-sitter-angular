@@ -232,7 +232,7 @@ String concat with pipes
 String concat with pipes
 ====================
 
-{{ 'xx' | transloco: xx + yy }}
+{{ 'Hello' | smartPluralize : a + s }}
 
 ---
 
@@ -248,5 +248,65 @@ String concat with pipes
             (binary_expression
               (expression
                 (identifier))
-              (expression
+              (identifier))))))))
+
+====================
+Multiple string concat with pipes
+====================
+
+{{ 'Hello' | smartPluralize : a + b + c + d }}
+
+---
+
+(document
+  (interpolation
+    (expression
+      (string)
+      (pipe_sequence
+        (pipe_operator)
+        (pipe_call
+          (identifier)
+          (pipe_arguments
+            (binary_expression
+              (binary_expression
+                (binary_expression
+                  (expression
+                    (identifier))
+                  (identifier))
+                (identifier))
+              (identifier))))))))
+
+====================
+Multiple string concat with pipes
+====================
+
+{{ 'Hello' | smartPluralize : xx[1] + yy['String'] + zz.a.b.c }}
+
+---
+
+(document
+  (interpolation
+    (expression
+      (string)
+      (pipe_sequence
+        (pipe_operator)
+        (pipe_call
+          (identifier)
+          (pipe_arguments
+            (binary_expression
+              (binary_expression
+                (expression
+                  (bracket_expression
+                    (identifier)
+                    (identifier)))
+                (bracket_expression
+                  (identifier)
+                  (static_member_expression
+                    (identifier))))
+              (member_expression
+                (member_expression
+                  (member_expression
+                    (identifier)
+                    (identifier))
+                  (identifier))
                 (identifier)))))))))

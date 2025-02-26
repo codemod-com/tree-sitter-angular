@@ -233,6 +233,10 @@
         "required": true,
         "types": [
           {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
             "type": "expression",
             "named": true
           }
@@ -309,11 +313,39 @@
         "required": true,
         "types": [
           {
-            "type": "binary_expression",
+            "type": "array",
             "named": true
           },
           {
-            "type": "expression",
+            "type": "bracket_expression",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "group",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_expression",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "object",
+            "named": true
+          },
+          {
+            "type": "string",
             "named": true
           }
         ]
@@ -2217,40 +2249,37 @@
   {
     "type": "pipe_arguments",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "conditional_expression",
-          "named": true
-        },
-        {
-          "type": "expression",
-          "named": true
-        },
-        {
-          "type": "group",
-          "named": true
-        },
-        {
-          "type": "nullish_coalescing_expression",
-          "named": true
-        },
-        {
-          "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "argument": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "nullish_coalescing_expression",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

@@ -88,10 +88,9 @@ String literal binding
           (binary_expression
             left: (expression
               (string))
-            right: (expression
-              (member_expression
-                object: (identifier)
-                property: (identifier))))))
+            right: (member_expression
+              object: (identifier)
+              property: (identifier)))))
       (attribute
         (property_binding
           (binding_name
@@ -135,7 +134,7 @@ With pipes
       (attribute
         (property_binding
           (binding_name
-              (identifier))
+            (identifier))
           (expression
             (identifier)
             (pipe_sequence
@@ -247,7 +246,7 @@ Regular attribute
       (attribute
         (attribute_name)
         (quoted_attribute_value
-         (attribute_value))))))
+          (attribute_value))))))
 
 =====================
 Empty attribute value
@@ -264,20 +263,13 @@ Empty attribute value
       (attribute
         (property_binding
           (binding_name
-            (identifier)
-          )
-        )
-      )
-    )
+            (identifier)))))
     (end_tag
-      (tag_name)
-    )
-  )
-)
+      (tag_name))))
 
 ===================
 Map property binding
-====================
+===================
 
 <span [property]="form.controls[section].touched"></span>
 
@@ -408,7 +400,6 @@ Nullish coalescing
             (identifier)))))
     (end_tag
       (tag_name))))
-
 
 ==================
 Ternary expression
@@ -544,9 +535,8 @@ NgStyle with calculation
                 key: (identifier)
                 value: (binary_expression
                   left: (expression
-                   (identifier))
-                  right: (expression
-                    (string)))))))))
+                    (identifier))
+                  right: (string))))))))
     (end_tag
       (tag_name))))
 
@@ -571,16 +561,13 @@ NgStyle with complex calculation
               (pair
                 key: (identifier)
                 value: (binary_expression
-                  left: (expression
-                    (identifier))
-                  right: (binary_expression
-                    left: (expression
-                      (identifier))
-                    right: (binary_expression
+                  left: (binary_expression
+                    left: (binary_expression
                       left: (expression
                         (identifier))
-                      right: (expression
-                        (string)))))))))))
+                      right: (identifier))
+                    right: (identifier))
+                  right: (string))))))))
     (end_tag
       (tag_name))))
 

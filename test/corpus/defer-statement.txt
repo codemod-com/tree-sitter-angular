@@ -116,8 +116,7 @@ Defer with conditional trigger
             (member_expression
               object: (identifier)
               property: (identifier)))
-          right: (expression
-            (identifier)))))
+          right: (identifier))))
     body: (statement_block
       (element
         (self_closing_tag
