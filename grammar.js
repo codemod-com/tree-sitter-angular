@@ -185,7 +185,7 @@ module.exports = grammar(HTML, {
           alias($.for_start, $.control_keyword),
           '(',
           field('declaration', $.for_declaration),
-          optional(seq(';', field('reference', $.for_reference))),
+          optional(field('references', $.for_references)),
           ')',
           field('body', $.statement_block),
         ),
@@ -204,11 +204,18 @@ module.exports = grammar(HTML, {
         field('track', $._any_expression),
       ),
 
+    for_references: ($) =>
+      seq(
+        ';',
+        field('reference', $.for_reference),
+        repeat(seq(';', field('reference', $.for_reference))),
+      ),
+
     for_reference: ($) =>
       seq(
         alias('let', $.special_keyword),
         field('alias', $.assignment_expression),
-        repeat(seq(choice(';', ','), field('alias', $.assignment_expression))),
+        repeat(seq(',', field('alias', $.assignment_expression))),
       ),
 
     // ---------- If Statement ----------

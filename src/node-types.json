@@ -1493,6 +1493,22 @@
     }
   },
   {
+    "type": "for_references",
+    "named": true,
+    "fields": {
+      "reference": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "for_reference",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "for_statement",
     "named": true,
     "fields": {
@@ -1516,12 +1532,12 @@
           }
         ]
       },
-      "reference": {
+      "references": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "for_reference",
+            "type": "for_references",
             "named": true
           }
         ]
