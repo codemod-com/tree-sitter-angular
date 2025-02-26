@@ -21,14 +21,16 @@ Switch statement
     body: (switch_body
       (case_statement
         (control_keyword)
-        value: (identifier)
+        value: (expression
+          (identifier))
         body: (statement_block
           (element
             (self_closing_tag
               (tag_name)))))
       (case_statement
         (control_keyword)
-        value: (identifier)
+        value: (expression
+          (identifier))
         body: (statement_block
           (element
             (self_closing_tag
@@ -57,7 +59,8 @@ Switch-default
     body: (switch_body
       (case_statement
         (control_keyword)
-        value: (identifier)
+        value: (expression
+          (identifier))
         body: (statement_block
           (element
             (self_closing_tag

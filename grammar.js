@@ -104,7 +104,7 @@ module.exports = grammar(HTML, {
       seq(
         alias($.case_start, $.control_keyword),
         '(',
-        field('value', $._primitive),
+        field('value', $._any_expression),
         ')',
         field('body', $.statement_block),
       ),
