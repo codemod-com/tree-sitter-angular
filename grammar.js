@@ -585,6 +585,7 @@ module.exports = grammar(HTML, {
         PREC.CALL,
         seq(
           field('object', $._primitive),
+          optional(choice('?.', '!')),
           '[',
           field(
             'property',

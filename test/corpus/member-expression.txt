@@ -1,0 +1,43 @@
+=============
+Bracket expression with optional chaining
+=============
+
+{{ (var$ | async)?.[question.id] }}
+
+---
+
+(document
+  (interpolation
+    (expression
+      (bracket_expression
+        (group
+          (expression
+            (identifier)
+            (pipe_sequence
+              (pipe_operator)
+              (pipe_call
+                (identifier)))))
+        (member_expression
+          (identifier)
+          (identifier))))))
+
+=============
+Bracket expression with non-null assertion
+=============
+
+{{ (var$ | async)![x] }}
+
+---
+
+(document
+  (interpolation
+    (expression
+      (bracket_expression
+        (group
+          (expression
+            (identifier)
+            (pipe_sequence
+              (pipe_operator)
+              (pipe_call
+                (identifier)))))
+        (identifier)))))
