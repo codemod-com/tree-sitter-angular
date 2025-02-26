@@ -331,6 +331,7 @@ module.exports = grammar(HTML, {
       seq(
         $._any_expression,
         optional($._alias),
+        optional($._then_template_expression),
         optional($._else_template_expression),
         optional($._context_expression),
       ),
@@ -361,6 +362,8 @@ module.exports = grammar(HTML, {
       ),
 
     _alias: ($) => seq(alias('as', $.special_keyword), field('alias', $.identifier)),
+    _then_template_expression: ($) =>
+      seq(';', alias('then', $.special_keyword), $.identifier),
     _else_template_expression: ($) =>
       seq(';', alias('else', $.special_keyword), $.identifier),
     _context_expression: ($) =>
