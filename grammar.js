@@ -266,7 +266,7 @@ module.exports = grammar(HTML, {
     icu_expression: ($) =>
       seq(
         '{',
-        choice($._any_expression, $.concatenation_expression),
+        choice($._any_expression),
         ',',
         $.icu_clause,
         ',',
@@ -286,15 +286,9 @@ module.exports = grammar(HTML, {
         PREC.INTERPOLATION,
         seq(
           alias($._interpolation_start, '{{'),
-          choice($._any_expression, $.concatenation_expression),
+          choice($._any_expression),
           alias($._interpolation_end, '}}'),
         ),
-      ),
-
-    concatenation_expression: ($) =>
-      prec(
-        2,
-        seq($._primitive, '+', $.expression, optional(repeat(seq('+', $._primitive)))),
       ),
 
     // ---------- Property Binding ---------

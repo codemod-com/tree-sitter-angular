@@ -141,18 +141,19 @@ Grouping
     (start_tag
       (tag_name))
     (interpolation
-      (concatenation_expression
-        (group
-          (expression
-            (member_expression
-              (group
-                (expression
-                  (identifier)
-                  (pipe_sequence
-                    (pipe_operator)
-                    (pipe_call
-                      (identifier)))))
-              (identifier))))
+      (binary_expression
+        (expression
+          (group
+            (expression
+              (member_expression
+                (group
+                  (expression
+                    (identifier)
+                    (pipe_sequence
+                      (pipe_operator)
+                      (pipe_call
+                        (identifier)))))
+                (identifier)))))
         (expression
           (string))))
     (end_tag
@@ -199,11 +200,14 @@ String concatenation
     (start_tag
       (tag_name))
     (interpolation
-      (concatenation_expression
-        (string)
+      (binary_expression
+        (binary_expression
+          (expression
+            (string))
+          (expression
+            (identifier)))
         (expression
-          (identifier))
-        (string)))
+          (string))))
     (end_tag
       (tag_name))))
 
@@ -217,8 +221,9 @@ String concat with pipes
 
 (document
   (interpolation
-    (concatenation_expression
-      (string)
+    (binary_expression
+      (expression
+        (string))
       (expression
         (member_expression
           (identifier)
@@ -321,3 +326,29 @@ Multiple string concat with pipes
                       (identifier))
                     (identifier))
                   (identifier))))))))))
+
+====================
+Three concatenated words with i18n pipe
+====================
+
+{{ 'part1.' + x + '.' + part  | i18n }}
+
+---
+
+(document
+  (interpolation
+    (binary_expression
+      (binary_expression
+        (binary_expression
+          (expression
+            (string))
+          (expression
+            (identifier)))
+        (expression
+          (string)))
+      (expression
+        (identifier)
+        (pipe_sequence
+          (pipe_operator)
+          (pipe_call
+            (identifier)))))))
