@@ -250,7 +250,6 @@ NgFor
             (special_keyword)
             (structural_assignment
               (identifier)
-              (identifier)
               (expression
                 (identifier)))))))
     (interpolation
@@ -278,7 +277,6 @@ NgFor with alias
           (structural_declaration
             (special_keyword)
             (structural_assignment
-              (identifier)
               (identifier)
               (expression
                 (identifier)))
@@ -551,3 +549,27 @@ With binary expression condition including pipe
                     (identifier)))))))))
     (end_tag
       (tag_name))))
+
+=============
+With reference and call expression
+=============
+
+<div *ngIf="getStatus(task); let status" />
+
+---
+
+(document
+  (element
+    (self_closing_tag
+      (tag_name)
+      (attribute
+        (structural_directive
+          (identifier)
+          (structural_expression
+            (expression
+              (call_expression
+                (identifier)
+                (arguments
+                  (identifier))))
+            (special_keyword)
+            (identifier)))))))

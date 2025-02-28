@@ -311,7 +311,7 @@ module.exports = grammar(HTML, {
           seq(
             '=',
             $._double_quote,
-            choice($.structural_expression, $.structural_declaration),
+            choice($.structural_declaration, $.structural_expression),
             $._double_quote,
           ),
         ),
@@ -321,9 +321,14 @@ module.exports = grammar(HTML, {
       seq(
         $._any_expression,
         optional($._alias),
-        optional($._then_template_expression),
-        optional($._else_template_expression),
-        optional($._context_expression),
+        choice(
+          $._structural_let_expression,
+          seq(
+            optional($._then_template_expression),
+            optional($._else_template_expression),
+          ),
+          optional($._context_expression),
+        ),
       ),
 
     structural_declaration: ($) =>
@@ -343,9 +348,13 @@ module.exports = grammar(HTML, {
           seq(
             optional(alias('let', $.special_keyword)),
             field('name', $.identifier),
-            field('operator', choice($.identifier, '=')),
-            field('value', $.expression),
-            optional($._alias),
+            optional(
+              seq(
+                field('operator', choice('=', 'of')),
+                field('value', $.expression),
+                optional($._alias),
+              ),
+            ),
           ),
         ),
         seq(field('name', $.identifier), optional($._alias)),
@@ -362,6 +371,14 @@ module.exports = grammar(HTML, {
         choice(alias('context', $.special_keyword), field('named', $.identifier)),
         ':',
         $._any_expression,
+      ),
+
+    _structural_let_expression: ($) =>
+      seq(
+        ';',
+        alias('let', $.special_keyword),
+        field('name', $.identifier),
+        optional($._alias),
       ),
 
     // ---------- Bindings ----------
