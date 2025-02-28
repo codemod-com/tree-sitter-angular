@@ -570,6 +570,7 @@ With reference and call expression
               (call_expression
                 (identifier)
                 (arguments
-                  (identifier))))
+                  (expression
+                    (identifier)))))
             (special_keyword)
             (identifier)))))))

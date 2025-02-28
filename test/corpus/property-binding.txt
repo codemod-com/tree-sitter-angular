@@ -182,7 +182,8 @@ Event binding
             (call_expression
               (identifier)
               (arguments
-                (identifier)))))))))
+                (expression
+                  (identifier))))))))))
 
 ========================
 Event binding expression
@@ -225,7 +226,8 @@ Event binding with mutiple expressions
             (call_expression
               (identifier)
               (arguments
-                (identifier))))
+                (expression
+                  (identifier)))))
           (expression
             (member_expression
               (identifier)

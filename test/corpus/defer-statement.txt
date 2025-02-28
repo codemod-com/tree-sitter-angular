@@ -63,9 +63,10 @@ Defer with multiple triggers
         trigger: (call_expression
           function: (identifier)
           arguments: (arguments
-            (number
-              (number_fragment)
-              (unit))))))
+            (expression
+              (number
+                (number_fragment)
+                (unit)))))))
     body: (statement_block
       (element
         (self_closing_tag

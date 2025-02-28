@@ -570,10 +570,7 @@ module.exports = grammar(HTML, {
         ),
       ),
     arguments: ($) =>
-      seq(
-        choice($._primitive, $.binary_expression, $.unary_expression),
-        repeat(seq(',', $._primitive)),
-      ),
+      commaSep1(choice($.expression, $.binary_expression, $.unary_expression)),
 
     // Member expression
     member_expression: ($) =>
