@@ -681,3 +681,28 @@ Object literal
                     (number_fragment)))))))))
     (end_tag
       (tag_name))))
+
+==================
+Object shorthand
+==================
+
+<element [property]="{ key1, key2 }"></element>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (expression
+            (object
+              (pair
+                (identifier))
+              (pair
+                (identifier)))))))
+    (end_tag
+      (tag_name))))

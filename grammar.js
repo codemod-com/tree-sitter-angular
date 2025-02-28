@@ -499,8 +499,7 @@ module.exports = grammar(HTML, {
     pair: ($) =>
       seq(
         field('key', choice($.identifier, $.string)),
-        ':',
-        field('value', $._any_expression),
+        optional(seq(':', field('value', $._any_expression))),
       ),
 
     // Array
