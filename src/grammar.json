@@ -3043,7 +3043,7 @@
     },
     "number_fragment": {
       "type": "PATTERN",
-      "value": "[0-9]+\\.?[0-9]*"
+      "value": "\\-?[0-9]+\\.?[0-9]*"
     },
     "number": {
       "type": "CHOICE",

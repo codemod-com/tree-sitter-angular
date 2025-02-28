@@ -539,7 +539,7 @@ module.exports = grammar(HTML, {
       ),
 
     // Number
-    number_fragment: () => /[0-9]+\.?[0-9]*/,
+    number_fragment: () => /\-?[0-9]+\.?[0-9]*/,
 
     number: ($) =>
       choice($.number_fragment, seq($.number_fragment, alias(choice('ms', 's'), $.unit))),

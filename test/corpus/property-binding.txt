@@ -800,3 +800,69 @@ Array with trailing comma
     (text)
     (end_tag
       (tag_name))))
+
+==================
+Negative numbers in property binding
+==================
+
+<div [x]="amount * -1 | currency: 'USD'">
+  Hello
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (binary_expression
+            (expression
+              (identifier))
+            (expression
+              (number
+                (number_fragment))
+              (pipe_sequence
+                (pipe_operator)
+                (pipe_call
+                  (identifier)
+                  (pipe_arguments
+                    (expression
+                      (string))))))))))
+    (text)
+    (end_tag
+      (tag_name))))
+
+==================
+Negative numbers in interpolation
+==================
+
+<div>
+  {{ amount * -1 | currency: 'USD' }}
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name))
+    (interpolation
+      (binary_expression
+        (expression
+          (identifier))
+        (expression
+          (number
+            (number_fragment))
+          (pipe_sequence
+            (pipe_operator)
+            (pipe_call
+              (identifier)
+              (pipe_arguments
+                (expression
+                  (string))))))))
+    (end_tag
+      (tag_name))))
