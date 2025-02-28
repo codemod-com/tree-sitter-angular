@@ -32,7 +32,8 @@ NgIf
             (conditional_expression
               (identifier)
               (conditional_operator)
-              (identifier))))))
+              (expression
+                (identifier)))))))
     (interpolation
       (expression
         (identifier)))
@@ -141,7 +142,8 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (identifier))))))
+              right: (expression
+                (identifier)))))))
     (end_tag
       (tag_name)))
   (element
@@ -154,7 +156,8 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (identifier))))))
+              right: (expression
+                (identifier)))))))
     (end_tag
       (tag_name)))
   (element
@@ -167,7 +170,8 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (identifier))))))
+              right: (expression
+                (identifier)))))))
     (end_tag
       (tag_name)))
   (element
@@ -180,7 +184,8 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (identifier))))))
+              right: (expression
+                (identifier)))))))
     (end_tag
       (tag_name)))
   (element
@@ -193,7 +198,8 @@ NgIf binary expression
             (binary_expression
               left: (expression
                 (identifier))
-              right: (identifier))))))
+              right: (expression
+                (identifier)))))))
     (end_tag
       (tag_name)))
   (element
@@ -206,7 +212,8 @@ NgIf binary expression
             (conditional_expression
               left: (identifier)
               (conditional_operator)
-              right: (identifier))))))
+              right: (expression
+                (identifier)))))))
     (end_tag
       (tag_name)))
   (element
@@ -219,7 +226,8 @@ NgIf binary expression
             (conditional_expression
               left: (identifier)
               (conditional_operator)
-              right: (identifier))))))
+              right: (expression
+                (identifier)))))))
     (end_tag
       (tag_name))))
 
@@ -369,14 +377,16 @@ Template Outlet context
                     (member_expression
                       object: (identifier)
                       property: (identifier)))
-                  right: (identifier))
+                  right: (expression
+                    (identifier)))
                 (conditional_operator)
                 right: (binary_expression
                   left: (expression
                     (member_expression
                       object: (identifier)
                       property: (identifier)))
-                  right: (identifier)))
+                  right: (expression
+                    (identifier))))
               (ternary_operator)
               consequence: (identifier)
               (ternary_operator)
@@ -460,19 +470,21 @@ Multi-line structural directive
                     (member_expression
                       (identifier)
                       (identifier))))
-                (bracket_expression
-                  (identifier)
+                (expression
                   (bracket_expression
                     (identifier)
-                    (static_member_expression
-                      (expression
-                        (string))))))
-              (bracket_expression
-                (identifier)
-                (static_member_expression
-                  (expression
-                    (number
-                      (number_fragment))))))))))
+                    (bracket_expression
+                      (identifier)
+                      (static_member_expression
+                        (expression
+                          (string)))))))
+              (expression
+                (bracket_expression
+                  (identifier)
+                  (static_member_expression
+                    (expression
+                      (number
+                        (number_fragment)))))))))))
     (end_tag
       (tag_name))))
 
@@ -503,5 +515,38 @@ NgIf with then and else
     (interpolation
       (expression
         (identifier)))
+    (end_tag
+      (tag_name))))
+
+=============
+With binary expression condition including pipe
+=============
+
+<tag
+  *ngIf="
+      type &&
+      onlyReferentCanAccess | isNil
+  ">
+</tag>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (structural_directive
+          (identifier)
+          (structural_expression
+            (conditional_expression
+              (identifier)
+              (conditional_operator)
+              (expression
+                (identifier)
+                (pipe_sequence
+                  (pipe_operator)
+                  (pipe_call
+                    (identifier)))))))))
     (end_tag
       (tag_name))))

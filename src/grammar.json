@@ -2442,7 +2442,7 @@
             "name": "right",
             "content": {
               "type": "SYMBOL",
-              "name": "_primitive"
+              "name": "expression"
             }
           }
         ]
@@ -2604,7 +2604,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_primitive"
+                  "name": "expression"
                 },
                 {
                   "type": "SYMBOL",

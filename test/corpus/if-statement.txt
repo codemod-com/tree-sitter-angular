@@ -15,7 +15,8 @@ If statement
       (binary_expression
         left: (expression
           (identifier))
-        right: (identifier)))
+        right: (expression
+          (identifier))))
     consequence: (statement_block
       (element
         (start_tag
@@ -43,7 +44,8 @@ Else-if statement
       (binary_expression
         left: (expression
           (identifier))
-        right: (identifier)))
+        right: (expression
+          (identifier))))
     consequence: (statement_block
       (element
         (start_tag
@@ -57,8 +59,9 @@ Else-if statement
         (binary_expression
           left: (expression
             (identifier))
-          right: (number
-            (number_fragment))))
+          right: (expression
+            (number
+              (number_fragment)))))
       consequence: (statement_block
         (element
           (start_tag
@@ -88,7 +91,8 @@ If-else-if-else statement
       (binary_expression
         left: (expression
           (identifier))
-        right: (identifier)))
+        right: (expression
+          (identifier))))
     consequence: (statement_block
       (element
         (start_tag
@@ -102,8 +106,9 @@ If-else-if-else statement
         (binary_expression
           left: (expression
             (identifier))
-          right: (number
-            (number_fragment))))
+          right: (expression
+            (number
+              (number_fragment)))))
       consequence: (statement_block
         (element
           (start_tag
@@ -140,7 +145,8 @@ Else statement
       (binary_expression
         left: (expression
           (identifier))
-        right: (identifier)))
+        right: (expression
+          (identifier))))
     consequence: (statement_block
       (element
         (start_tag
@@ -180,7 +186,8 @@ Nested if
       (conditional_expression
         left: (identifier)
         (conditional_operator)
-        right: (identifier)))
+        right: (expression
+          (identifier))))
     consequence: (statement_block
       (element
         (start_tag
@@ -194,7 +201,8 @@ Nested if
           (binary_expression
             left: (expression
               (identifier))
-            right: (identifier)))
+            right: (expression
+              (identifier))))
         consequence: (statement_block
           (element
             (start_tag
@@ -337,12 +345,14 @@ Multiple if conditions
         left: (binary_expression
           left: (expression
             (identifier))
-          right: (identifier))
+          right: (expression
+            (identifier)))
         (conditional_operator)
         right: (binary_expression
           left: (expression
             (identifier))
-          right: (identifier))))
+          right: (expression
+            (identifier)))))
     consequence: (statement_block
       (element
         (start_tag
@@ -410,11 +420,14 @@ If statement with expression
           left: (binary_expression
             left: (expression
               (identifier))
-            right: (number
-              (number_fragment)))
-          right: (identifier))
-        right: (number
-          (number_fragment))))
+            right: (expression
+              (number
+                (number_fragment))))
+          right: (expression
+            (identifier)))
+        right: (expression
+          (number
+            (number_fragment)))))
     consequence: (statement_block
       (element
         (start_tag
@@ -447,7 +460,8 @@ If with text sibling
         (binary_expression
           (expression
             (identifier))
-          (identifier)))
+          (expression
+            (identifier))))
       (statement_block
         (element
           (start_tag
@@ -487,7 +501,8 @@ If statement with element sibling
         (binary_expression
           (expression
             (identifier))
-          (identifier)))
+          (expression
+            (identifier))))
       (statement_block
         (element
           (start_tag

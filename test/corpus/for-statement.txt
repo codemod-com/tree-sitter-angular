@@ -243,7 +243,8 @@ For-statement with let
           (member_expression
             (identifier)
             (identifier)))
-        (identifier)))
+        (expression
+          (identifier))))
     (statement_block
       (element
         (start_tag

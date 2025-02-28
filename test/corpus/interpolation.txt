@@ -248,7 +248,8 @@ String concat with pipes
             (binary_expression
               (expression
                 (identifier))
-              (identifier))))))))
+              (expression
+                (identifier)))))))))
 
 ====================
 Multiple string concat with pipes
@@ -272,9 +273,12 @@ Multiple string concat with pipes
                 (binary_expression
                   (expression
                     (identifier))
-                  (identifier))
-                (identifier))
-              (identifier))))))))
+                  (expression
+                    (identifier)))
+                (expression
+                  (identifier)))
+              (expression
+                (identifier)))))))))
 
 ====================
 Multiple string concat with pipes
@@ -302,15 +306,17 @@ Multiple string concat with pipes
                       (expression
                         (number
                           (number_fragment))))))
-                (bracket_expression
-                  (identifier)
-                  (static_member_expression
-                    (expression
-                      (string)))))
-              (member_expression
+                (expression
+                  (bracket_expression
+                    (identifier)
+                    (static_member_expression
+                      (expression
+                        (string))))))
+              (expression
                 (member_expression
                   (member_expression
-                    (identifier)
+                    (member_expression
+                      (identifier)
+                      (identifier))
                     (identifier))
-                  (identifier))
-                (identifier)))))))))
+                  (identifier))))))))))

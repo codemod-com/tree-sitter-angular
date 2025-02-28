@@ -413,7 +413,7 @@ module.exports = grammar(HTML, {
         seq(
           field('left', choice($.expression, $.binary_expression)),
           field('operator', $._binary_op),
-          field('right', $._primitive),
+          field('right', $.expression),
         ),
       ),
 
@@ -451,7 +451,7 @@ module.exports = grammar(HTML, {
           field(
             'right',
             choice(
-              $._primitive,
+              $.expression,
               $.unary_expression,
               $.binary_expression,
               $.conditional_expression,

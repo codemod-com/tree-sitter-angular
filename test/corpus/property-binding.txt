@@ -88,9 +88,10 @@ String literal binding
           (binary_expression
             left: (expression
               (string))
-            right: (member_expression
-              object: (identifier)
-              property: (identifier)))))
+            right: (expression
+              (member_expression
+                object: (identifier)
+                property: (identifier))))))
       (attribute
         (property_binding
           (binding_name
@@ -456,7 +457,8 @@ Nested ternary expression
               (conditional_expression
                 (identifier)
                 (conditional_operator)
-                (identifier))
+                (expression
+                  (identifier)))
               (ternary_operator)
               (string)
               (ternary_operator)
@@ -538,7 +540,8 @@ NgStyle with calculation
                 value: (binary_expression
                   left: (expression
                     (identifier))
-                  right: (string))))))))
+                  right: (expression
+                    (string)))))))))
     (end_tag
       (tag_name))))
 
@@ -567,9 +570,12 @@ NgStyle with complex calculation
                     left: (binary_expression
                       left: (expression
                         (identifier))
-                      right: (identifier))
-                    right: (identifier))
-                  right: (string))))))))
+                      right: (expression
+                        (identifier)))
+                    right: (expression
+                      (identifier)))
+                  right: (expression
+                    (string)))))))))
     (end_tag
       (tag_name))))
 

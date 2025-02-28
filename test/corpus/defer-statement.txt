@@ -118,8 +118,9 @@ Defer with conditional trigger
             (member_expression
               object: (identifier)
               property: (identifier)))
-          right: (number
-            (number_fragment)))))
+          right: (expression
+            (number
+              (number_fragment))))))
     body: (statement_block
       (element
         (self_closing_tag
