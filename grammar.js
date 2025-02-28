@@ -495,7 +495,7 @@ module.exports = grammar(HTML, {
       ),
 
     // Object
-    object: ($) => seq('{', commaSep($.pair), '}'),
+    object: ($) => seq('{', commaSep($.pair), optional(','), '}'),
     pair: ($) =>
       seq(
         field('key', choice($.identifier, $.string)),
@@ -503,7 +503,7 @@ module.exports = grammar(HTML, {
       ),
 
     // Array
-    array: ($) => seq('[', commaSep($._any_expression), ']'),
+    array: ($) => seq('[', commaSep($._any_expression), optional(','), ']'),
 
     // Identifier
     identifier: () => /[a-zA-Z_\$][a-zA-Z_0-9\-\$]*/,

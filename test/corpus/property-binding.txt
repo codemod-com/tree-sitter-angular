@@ -744,3 +744,59 @@ Array with array and ternary
     (text)
     (end_tag
       (tag_name))))
+
+==================
+Object with trailing comma
+==================
+
+<div [ngClass]="{ 'abc': defg, }">
+  Hello
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (expression
+            (object
+              (pair
+                (string)
+                (expression
+                  (identifier))))))))
+    (text)
+    (end_tag
+      (tag_name))))
+
+==================
+Array with trailing comma
+==================
+
+<div [ngClass]="['abc', 'def', ]">
+  Hello
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (expression
+            (array
+              (expression
+                (string))
+              (expression
+                (string)))))))
+    (text)
+    (end_tag
+      (tag_name))))
