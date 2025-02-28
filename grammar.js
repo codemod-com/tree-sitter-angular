@@ -503,7 +503,7 @@ module.exports = grammar(HTML, {
       ),
 
     // Array
-    array: ($) => seq('[', commaSep($.expression, $.unary_expression), ']'),
+    array: ($) => seq('[', commaSep($._any_expression), ']'),
 
     // Identifier
     identifier: () => /[a-zA-Z_\$][a-zA-Z_0-9\-\$]*/,

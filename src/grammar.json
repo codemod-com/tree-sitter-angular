@@ -2872,7 +2872,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_any_expression"
                 },
                 {
                   "type": "REPEAT",
@@ -2885,7 +2885,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "expression"
+                        "name": "_any_expression"
                       }
                     ]
                   }

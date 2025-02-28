@@ -706,3 +706,37 @@ Object shorthand
                 (identifier)))))))
     (end_tag
       (tag_name))))
+
+==================
+Array with array and ternary
+==================
+
+<div [ngClass]="[!condition ? 'className1' : 'className2']">
+  Hello
+</div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (expression
+            (array
+              (ternary_expression
+                (unary_expression
+                  (unary_operator)
+                  (expression
+                    (identifier)))
+                (ternary_operator)
+                (string)
+                (ternary_operator)
+                (expression
+                  (string))))))))
+    (text)
+    (end_tag
+      (tag_name))))
