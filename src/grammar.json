@@ -2315,6 +2315,38 @@
         }
       ]
     },
+    "_attribute_node": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^\"]"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_escape_sequence"
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "interpolation"
+          }
+        }
+      ]
+    },
     "_normal_attribute": {
       "type": "SEQ",
       "members": [
@@ -2336,12 +2368,86 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "attribute_value"
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "_double_quote"
+                        },
+                        {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "ALIAS",
+                                "content": {
+                                  "type": "IMMEDIATE_TOKEN",
+                                  "content": {
+                                    "type": "PATTERN",
+                                    "value": "[^\"{]+"
+                                  }
+                                },
+                                "named": true,
+                                "value": "string_content"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "_escape_sequence"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "interpolation"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "_double_quote"
+                        }
+                      ]
                     },
                     {
-                      "type": "SYMBOL",
-                      "name": "quoted_attribute_value"
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "_single_quote"
+                        },
+                        {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "ALIAS",
+                                "content": {
+                                  "type": "IMMEDIATE_TOKEN",
+                                  "content": {
+                                    "type": "PATTERN",
+                                    "value": "[^'{]+"
+                                  }
+                                },
+                                "named": true,
+                                "value": "string_content"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "_escape_sequence"
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "interpolation"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "_single_quote"
+                        }
+                      ]
                     }
                   ]
                 }

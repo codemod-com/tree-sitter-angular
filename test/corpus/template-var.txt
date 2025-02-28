@@ -15,8 +15,6 @@ Template variable
         (attribute_name))
       (attribute
         (attribute_name)
-        (quoted_attribute_value
-          (attribute_value))))
+        (string_content)))
     (end_tag
       (tag_name))))
-

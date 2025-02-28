@@ -248,8 +248,7 @@ Regular attribute
       (tag_name)
       (attribute
         (attribute_name)
-        (quoted_attribute_value
-          (attribute_value))))))
+        (string_content)))))
 
 =====================
 Empty attribute value
@@ -866,5 +865,55 @@ Negative numbers in interpolation
               (pipe_arguments
                 (expression
                   (string))))))))
+    (end_tag
+      (tag_name))))
+
+==================
+Complex normal attribute with interpolation
+==================
+
+<i
+  tooltip="Welcome to {{
+    (request$ | async)?.title
+  }}"
+></i>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (string_content)
+        (interpolation
+          (expression
+            (member_expression
+              (group
+                (expression
+                  (identifier)
+                  (pipe_sequence
+                    (pipe_operator)
+                    (pipe_call
+                      (identifier)))))
+              (identifier))))))
+    (end_tag
+      (tag_name))))
+
+==================
+Empty attribute
+==================
+
+<div attr></div>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)))
     (end_tag
       (tag_name))))

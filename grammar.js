@@ -399,10 +399,44 @@ module.exports = grammar(HTML, {
 
     binding_name: ($) => seq(choice($.identifier, $.member_expression)),
 
+    _attribute_node: ($) =>
+      choice(
+        repeat(choice(token.immediate(/[^"]/), $._escape_sequence)),
+        prec(1, $.interpolation),
+      ),
+
     _normal_attribute: ($) =>
       seq(
         $.attribute_name,
-        optional(seq('=', choice($.attribute_value, $.quoted_attribute_value))),
+        optional(
+          seq(
+            '=',
+            choice(
+              seq(
+                $._double_quote,
+                repeat(
+                  choice(
+                    alias(token.immediate(/[^"{]+/), $.string_content),
+                    $._escape_sequence,
+                    $.interpolation,
+                  ),
+                ),
+                $._double_quote,
+              ),
+              seq(
+                $._single_quote,
+                repeat(
+                  choice(
+                    alias(token.immediate(/[^'{]+/), $.string_content),
+                    $._escape_sequence,
+                    $.interpolation,
+                  ),
+                ),
+                $._single_quote,
+              ),
+            ),
+          ),
+        ),
       ),
 
     // ---------- Expressions ---------
