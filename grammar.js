@@ -424,7 +424,7 @@ module.exports = grammar(HTML, {
         seq(
           field('condition', $._any_expression),
           alias('?', $.ternary_operator),
-          field('consequence', choice($.group, $._primitive)),
+          field('consequence', choice($.group, $._any_expression)),
           alias(':', $.ternary_operator),
           field('alternative', choice($.group, $._any_expression)),
         ),

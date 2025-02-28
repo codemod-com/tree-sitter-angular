@@ -86,7 +86,8 @@ Conditional expression
         (expression
           (identifier))
         (ternary_operator)
-        (string)
+        (expression
+          (string))
         (ternary_operator)
         (expression
           (string))))

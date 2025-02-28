@@ -424,7 +424,8 @@ Ternary expression
             (expression
               (identifier))
             (ternary_operator)
-            (identifier)
+            (expression
+              (identifier))
             (ternary_operator)
             (expression
               (identifier))))))
@@ -451,7 +452,8 @@ Nested ternary expression
             (expression
               (identifier))
             (ternary_operator)
-            (string)
+            (expression
+              (string))
             (ternary_operator)
             (ternary_expression
               (conditional_expression
@@ -460,7 +462,8 @@ Nested ternary expression
                 (expression
                   (identifier)))
               (ternary_operator)
-              (string)
+              (expression
+                (string))
               (ternary_operator)
               (expression
                 (string)))))))
@@ -733,7 +736,8 @@ Array with array and ternary
                   (expression
                     (identifier)))
                 (ternary_operator)
-                (string)
+                (expression
+                  (string))
                 (ternary_operator)
                 (expression
                   (string))))))))

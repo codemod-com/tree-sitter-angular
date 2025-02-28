@@ -388,7 +388,8 @@ Template Outlet context
                   right: (expression
                     (identifier))))
               (ternary_operator)
-              consequence: (identifier)
+              consequence: (expression
+                (identifier))
               (ternary_operator)
               alternative: (expression
                 (identifier)))
