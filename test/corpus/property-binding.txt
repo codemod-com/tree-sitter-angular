@@ -319,7 +319,8 @@ Binding with a static array access full
                   (identifier)
                   (identifier))
                 (static_member_expression
-                  (identifier)))
+                  (expression
+                    (string))))
               (identifier))))))
     (end_tag
       (tag_name))))
@@ -346,7 +347,8 @@ Binding with a static array access
             (bracket_expression
               (identifier)
               (static_member_expression
-                (identifier)))))))
+                (expression
+                  (string))))))))
     (end_tag
       (tag_name))))
 
@@ -612,5 +614,64 @@ Double unary expression
               (unary_operator)
               (expression
                 (identifier)))))))
+    (end_tag
+      (tag_name))))
+
+==================
+Array literal
+==================
+
+<element [property]="[a, 2, 3]"></element>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (expression
+            (array
+              (expression
+                (identifier))
+              (expression
+                (number
+                  (number_fragment)))
+              (expression
+                (number
+                  (number_fragment))))))))
+    (end_tag
+      (tag_name))))
+
+==================
+Object literal
+==================
+
+<element [property]="{ key: 'value', num: 42 }"></element>
+
+---
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (property_binding
+          (binding_name
+            (identifier))
+          (expression
+            (object
+              (pair
+                (identifier)
+                (expression
+                  (string)))
+              (pair
+                (identifier)
+                (expression
+                  (number
+                    (number_fragment)))))))))
     (end_tag
       (tag_name))))

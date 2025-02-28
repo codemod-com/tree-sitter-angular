@@ -172,11 +172,7 @@ module.exports = grammar(HTML, {
       ),
 
     timed_expression: ($) =>
-      seq(
-        alias(choice('after', 'minimum'), $.special_keyword),
-        field('value', $.number),
-        alias(choice('ms', 's'), $.unit),
-      ),
+      seq(alias(choice('after', 'minimum'), $.special_keyword), field('value', $.number)),
 
     // ---------- For Statement ----------
     for_statement: ($) =>
@@ -405,7 +401,10 @@ module.exports = grammar(HTML, {
 
     // Unary expression
     unary_expression: ($) =>
-      seq(field('operator', alias('!', $.unary_operator)), field('value', choice($.expression, $.unary_expression))),
+      seq(
+        field('operator', alias('!', $.unary_operator)),
+        field('value', choice($.expression, $.unary_expression)),
+      ),
 
     // Binary expression
     binary_expression: ($) =>
@@ -496,26 +495,19 @@ module.exports = grammar(HTML, {
       ),
 
     // Object
-    object: ($) => seq('{', repeat($.pair), '}'),
+    object: ($) => seq('{', commaSep($.pair), '}'),
     pair: ($) =>
       seq(
         field('key', choice($.identifier, $.string)),
         ':',
         field('value', $._any_expression),
-        optional(','),
       ),
 
     // Array
-    array: ($) =>
-      seq(
-        '[',
-        choice($.expression, $.unary_expression),
-        repeat(seq(',', choice($.expression, $.unary_expression))),
-        ']',
-      ),
+    array: ($) => seq('[', commaSep($.expression, $.unary_expression), ']'),
 
     // Identifier
-    identifier: () => /[a-zA-Z_0-9\-\$]+/,
+    identifier: () => /[a-zA-Z_\$][a-zA-Z_0-9\-\$]*/,
 
     _escape_sequence: (_) =>
       token.immediate(
@@ -548,7 +540,10 @@ module.exports = grammar(HTML, {
       ),
 
     // Number
-    number: () => /[0-9]+\.?[0-9]*/,
+    number_fragment: () => /[0-9]+\.?[0-9]*/,
+
+    number: ($) =>
+      choice($.number_fragment, seq($.number_fragment, alias(choice('ms', 's'), $.unit))),
 
     // Group
     group: ($) => seq('(', $._any_expression, ')'),
@@ -603,7 +598,7 @@ module.exports = grammar(HTML, {
         ),
       ),
 
-    static_member_expression: ($) => seq($._single_quote, $.identifier, $._single_quote),
+    static_member_expression: ($) => $._any_expression,
 
     // ---------- Base ----------
     _closing_bracket: (_) => token(prec(-1, '}')),
@@ -630,3 +625,25 @@ module.exports = grammar(HTML, {
       ),
   },
 });
+
+/**
+ * Creates a rule to match one or more of the rules separated by a comma
+ *
+ * @param {Rule} rule
+ *
+ * @return {SeqRule}
+ */
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(',', rule)));
+}
+
+/**
+ * Creates a rule to optionally match one or more of the rules separated by a comma
+ *
+ * @param {Rule} rule
+ *
+ * @return {ChoiceRule}
+ */
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}

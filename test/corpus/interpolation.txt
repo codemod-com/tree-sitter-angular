@@ -298,11 +298,15 @@ Multiple string concat with pipes
                 (expression
                   (bracket_expression
                     (identifier)
-                    (identifier)))
+                    (static_member_expression
+                      (expression
+                        (number
+                          (number_fragment))))))
                 (bracket_expression
                   (identifier)
                   (static_member_expression
-                    (identifier))))
+                    (expression
+                      (string)))))
               (member_expression
                 (member_expression
                   (member_expression

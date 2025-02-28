@@ -465,10 +465,14 @@ Multi-line structural directive
                   (bracket_expression
                     (identifier)
                     (static_member_expression
-                      (identifier)))))
+                      (expression
+                        (string))))))
               (bracket_expression
                 (identifier)
-                (identifier)))))))
+                (static_member_expression
+                  (expression
+                    (number
+                      (number_fragment))))))))))
     (end_tag
       (tag_name))))
 
